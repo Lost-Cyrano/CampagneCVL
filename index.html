@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campagne CVL - Votez [Ton Nom]</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 10px;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #eee;
+            color: #666;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #intro {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://r2-aisevendaydelete-004-prod.214dcedd27630abef236dcb67de0ce92.r2.cloudflarestorage.com/temporary/20241002/other/1727880370612-b53fee08-18b6-c355-3685-e9ff99b136a0.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=91ac9d3ee865be05c575d38c9bdd1275%2F20241002%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241002T144610Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=18cb2d1a502be4fd00b30e3371bbc0d498d8cfaaa622a749cf08ed85b6fc1c39') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button {
+            padding: 15px 30px;
+            background-color: #ff6347;
+            color: white;
+            border-radius: 30px;
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .button:hover {
+                background-color: #ff4500;
+            }
+
+        #presentation {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            height: auto;
+            min-height: 100vh; /* Ajuste la hauteur de la présentation */
+        }
+
+            #presentation.active {
+                display: block;
+            }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+            .actions .button {
+                padding: 15px 30px;
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 30px;
+                font-size: 1.2em;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+                width: 80%;
+            }
+
+                .actions .button:hover {
+                    background-color: #45a049;
+                }
+
+        .content {
+            display: none;
+            padding: 20px;
+            background-color: #e0f7fa;
+            border-radius: 10px;
+            margin-top: 10px;
+            width: 80%;
+        }
+
+            .content p {
+                text-align: left;
+                font-size: 1.1em;
+            }
+
+        .active-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>Campagne de [Ton Nom] pour les élections CVL</header>
+
+    <!-- Full-screen image with a centered button -->
+    <div id="intro">
+        <a href="#" id="discoverBtn" class="button">Découvrir mon programme</a>
+    </div>
+
+    <!-- Presentation after button click -->
+    <div id="presentation">
+        <h1>Qui suis-je ?</h1>
+        <p>Je me présente à vous avec une campagne qui repose sur deux principes simples : <strong>l'humour</strong> et <strong>la qualité de vie</strong>. Si je suis arrivé ici à cause d’un pari perdu, je compte bien gagner les élections et améliorer votre quotidien avec le sourire !</p>
+
+        <div class="actions">
+            <a href="#" class="button" data-target="program1">Réformer le self</a>
+            <div id="program1" class="content">
+                <p>Mon projet principal est très clair : réformer le self. Il est temps que chacun puisse enfin manger correctement, sans se demander si la qualité, la quantité ou même le prix seront au rendez-vous.</p>
+            </div>
+
+            <a href="#" class="button" data-target="program2">Créer un foyer</a>
+            <div id="program2" class="content">
+                <p>Je veux finaliser un projet qui nous tient à cœur : la création d’un vrai foyer pour le lycée. Imaginez un espace avec une cafétéria, des zones de travail, de repos et de jeux, un lieu où chacun peut se sentir bien, se détendre, et surtout se ressourcer.</p>
+            </div>
+
+            <a href="#" class="button" data-target="program3">Être à votre écoute</a>
+            <div id="program3" class="content">
+                <p>Je tiens à porter vos idées, vos petits projets qui, au final, contribuent à faire du lycée un endroit où il fait bon vivre. Je suis ici pour vous écouter, vous comprendre et vous aider à rendre votre quotidien meilleur.</p>
+            </div>
+
+            <a href="#" class="button">J'ai un projet</a> <!-- Bouton qui ne fait rien -->
+        </div>
+    </div>
+
+    <footer>&copy; 2024 [Ton Nom] - Campagne CVL</footer>
+
+    <script>
+        const discoverBtn = document.getElementById('discoverBtn');
+        const intro = document.getElementById('intro');
+        const presentation = document.getElementById('presentation');
+        const buttons = document.querySelectorAll('.actions .button');
+        const contents = document.querySelectorAll('.content');
+
+        discoverBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            intro.style.display = 'none';
+            presentation.classList.add('active');
+        });
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('data-target');
+                if (targetId) {
+                    e.preventDefault();
+                    const content = document.getElementById(targetId);
+                    content.classList.toggle('active-content');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
