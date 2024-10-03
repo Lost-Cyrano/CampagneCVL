@@ -18,28 +18,40 @@
             padding: 10px;
             color: white;
             font-size: 1.5em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure the header stays on top */
         }
 
         footer {
             text-align: center;
-            margin-top: 20px;
             padding: 10px;
             background-color: #eee;
             color: #666;
             position: fixed;
             bottom: 0;
+            left: 0;
             width: 100%;
+            z-index: 1000; /* Ensure the footer stays on top */
+        }
+
+        /* Added padding to prevent content overlap */
+        main {
+            padding-top: 60px; /* Same height as header */
+            padding-bottom: 60px; /* Same height as footer */
         }
 
         #intro {
             position: relative;
             width: 100vw;
-            height: 100vh;
+            height: calc(100vh - 120px); /* Adjusted for header and footer height */
             background: url('https://r2-aisevendaydelete-004-prod.214dcedd27630abef236dcb67de0ce92.r2.cloudflarestorage.com/temporary/20241002/other/1727880370612-b53fee08-18b6-c355-3685-e9ff99b136a0.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=91ac9d3ee865be05c575d38c9bdd1275%2F20241002%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241002T144610Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=18cb2d1a502be4fd00b30e3371bbc0d498d8cfaaa622a749cf08ed85b6fc1c39') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 1s ease; /* Animation de transition */
+            transition: all 1s ease;
         }
 
         .fadeOut {
@@ -67,7 +79,7 @@
             padding: 20px;
             min-height: 100vh;
             background: url('https://media.discordapp.net/attachments/1172987436608004197/1291118189320863846/1727880370612-b53fee08-18b6-c355-3685-e9ff99b136a0-modified.png?ex=66feef04&is=66fd9d84&hm=b9eeabf7a687220ef0d099afeda08d9196ffdbd8360a18e01bac136e46ee06ef&=&format=webp&quality=lossless&width=401&height=571') no-repeat center center/cover;
-            color: white; /* Changement de la couleur du texte en blanc */
+            color: white;
         }
 
         #presentation.active {
@@ -93,7 +105,7 @@
         p {
             font-size: 1.2em;
             margin-bottom: 20px;
-            color: white; /* Couleur du texte en blanc */
+            color: white;
         }
 
         .actions {
@@ -131,103 +143,63 @@
         .content p {
             text-align: left;
             font-size: 1.1em;
-            color: black; /* Couleur du texte à l'intérieur des contenus */
+            color: black;
         }
 
         .active-content {
             display: block;
         }
 
-        #projectForm {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        #projectForm textarea {
-            width: 80%;
-            height: 100px;
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid #ccc;
-            font-size: 1em;
-        }
-
-        #projectForm button {
-            padding: 10px 20px;
-            background-color: #ff6347;
-            color: white;
-            border-radius: 10px;
-            border: none;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        #errorMessage {
-            display: none;
-            color: red;
-            margin-top: 15px;
-        }
     </style>
 </head>
 <body>
 
     <header>Campagne de MAIRE Anael pour les élections CVL</header>
 
-    <!-- Full-screen image with a centered button -->
-    <div id="intro">
-        <a href="#" id="discoverBtn" class="button">Découvrir mon programme</a>
-    </div>
+    <main>
+        <!-- Full-screen image with a centered button -->
+        <div id="intro">
+            <a href="#" id="discoverBtn" class="button">Découvrir mon programme</a>
+        </div>
 
-    <!-- Presentation after button click -->
-    <div id="presentation">
-        <h1>Qui suis-je ?</h1>
-        <p>Je ne vous le cache pas, je suis arrivé ici un peu par hasard… ou plutôt à cause d’un pari perdu ! Mais, puisqu'il faut bien aller jusqu'au bout, autant le faire du mieux possible non ? Alors c'est avec humour, sérieux (il en faut bien un peu quand même) et détermination, que je compte bien défendre vos intérêts.</p>
-        
-        <div class="actions">
-            <a href="#" class="button" data-target="program1">Réformer le self</a>
-            <div id="program1" class="content">
-                <p>Mon projet principal est très clair : réformer le self. L'objectif est de CONSIDERABLEMENT augmenter la qualité de la nourriture ! Il est temps que chacun puisse enfin manger correctement, sans se demander si la qualité, la quantité ou même le prix seront au rendez-vous. Je m'engage à défendre une nourriture de qualité, en quantité suffisante, et accessible à tous, mais aussi, dans de bonnes conditions !</p>
-            </div>
+        <!-- Presentation after button click -->
+        <div id="presentation">
+            <h1>Qui suis-je ?</h1>
+            <p>Je ne vous le cache pas, je suis arrivé ici un peu par hasard… ou plutôt à cause d’un pari perdu ! Mais, puisqu'il faut bien aller jusqu'au bout, autant le faire du mieux possible non ? Alors c'est avec humour, sérieux (il en faut bien un peu quand même) et détermination, que je compte bien défendre vos intérêts.</p>
+            
+            <div class="actions">
+                <a href="#" class="button" data-target="program1">Réformer le self</a>
+                <div id="program1" class="content">
+                    <p>Mon projet principal est très clair : réformer le self. L'objectif est de CONSIDERABLEMENT augmenter la qualité de la nourriture ! Il est temps que chacun puisse enfin manger correctement, sans se demander si la qualité, la quantité ou même le prix seront au rendez-vous. Je m'engage à défendre une nourriture de qualité, en quantité suffisante, et accessible à tous, mais aussi, dans de bonnes conditions !</p>
+                </div>
 
-            <a href="#" class="button" data-target="program2">Créer un foyer</a>
-            <div id="program2" class="content">
-                <p>Mais ce n’est pas tout ! Je veux également finaliser un projet qui nous tient à cœur : la création d’un vrai foyer pour le lycée. Imaginez un espace avec une cafétéria, des zones de travail, de repos et de jeux, un lieu où chacun peut se sentir bien, se détendre, et surtout se ressourcer, ...</p>
-            </div>
+                <a href="#" class="button" data-target="program2">Créer un foyer</a>
+                <div id="program2" class="content">
+                    <p>Mais ce n’est pas tout ! Je veux également finaliser un projet qui nous tient à cœur : la création d’un vrai foyer pour le lycée. Imaginez un espace avec une cafétéria, des zones de travail, de repos et de jeux, un lieu où chacun peut se sentir bien, se détendre, et surtout se ressourcer, ...</p>
+                </div>
 
-            <a href="#" class="button" data-target="program3">Être à votre écoute</a>
-            <div id="program3" class="content">
-                <p>Je tiens à porter vos idées, vos petits projets qui, au final, contribuent à faire du lycée un endroit où il fait bon vivre. Je suis ici pour vous écouter, vous comprendre et vous aider à rendre votre quotidien meilleur.</p>
-            </div>
+                <a href="#" class="button" data-target="program3">Être à votre écoute</a>
+                <div id="program3" class="content">
+                    <p>Je tiens à porter vos idées, vos petits projets qui, au final, contribuent à faire du lycée un endroit où il fait bon vivre. Je suis ici pour vous écouter, vous comprendre et vous aider à rendre votre quotidien meilleur.</p>
+                </div>
 
-            <a href="#" class="button" id="projectBtn">J'ai un projet</a>
-
-            <!-- Project submission form -->
-            <div id="projectForm">
-                <textarea placeholder="Décrivez votre projet ici..."></textarea>
-                <button id="submitProject">Envoyer</button>
-                <p id="errorMessage">Zut ! Une erreur est survenue lors de l'envoi ! Vraiment désolé... Si le projet te tient vraiment à cœur, tu peux toujours venir m'en parler en vrai pour que je le réalise !</p>
+                <!-- Nouveau bouton "Vos projets" -->
+                <a href="https://lost-cyrano.github.io/VosProjets/" class="button">Vos projets</a>
             </div>
         </div>
-    </div>
+    </main>
 
    <footer>
-   <a href="https://matias.me/nsfw/" style="color: inherit; text-decoration: none;">
-      &copy; 2024 Maire Anael et son équipe - Tous droits réservés
-   </a>
-</footer>
+       <a href="https://matias.me/nsfw/" style="color: inherit; text-decoration: none;">
+          &copy; 2024 Maire Anael et son équipe - Tous droits réservés
+       </a>
+   </footer>
 
     <script>
         const discoverBtn = document.getElementById('discoverBtn');
         const intro = document.getElementById('intro');
         const presentation = document.getElementById('presentation');
         const buttons = document.querySelectorAll('.button[data-target]');
-        const projectBtn = document.getElementById('projectBtn');
-        const projectForm = document.getElementById('projectForm');
-        const submitProject = document.getElementById('submitProject');
-        const errorMessage = document.getElementById('errorMessage');
 
         // Transition between intro and presentation
         discoverBtn.addEventListener('click', function(e) {
@@ -252,18 +224,6 @@
                     content.classList.add('active-content');
                 }
             });
-        });
-
-        // Show project form
-        projectBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            projectForm.style.display = 'flex';
-        });
-
-        // Simulate project submission with error message
-        submitProject.addEventListener('click', function(e) {
-            e.preventDefault();
-            errorMessage.style.display = 'block';
         });
     </script>
 
