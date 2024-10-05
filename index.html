@@ -22,7 +22,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000; /* Ensure the header stays on top */
+            z-index: 1000;
         }
 
         footer {
@@ -34,19 +34,18 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            z-index: 1000; /* Ensure the footer stays on top */
+            z-index: 1000;
         }
 
-        /* Added padding to prevent content overlap */
         main {
-            padding-top: 60px; /* Same height as header */
-            padding-bottom: 60px; /* Same height as footer */
+            padding-top: 60px;
+            padding-bottom: 60px;
         }
 
         #intro {
             position: relative;
             width: 100vw;
-            height: calc(100vh - 120px); /* Adjusted for header and footer height */
+            height: calc(100vh - 120px);
             background: url('https://r2-aisevendaydelete-004-prod.214dcedd27630abef236dcb67de0ce92.r2.cloudflarestorage.com/temporary/20241002/other/1727880370612-b53fee08-18b6-c355-3685-e9ff99b136a0.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=91ac9d3ee865be05c575d38c9bdd1275%2F20241002%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241002T144610Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=18cb2d1a502be4fd00b30e3371bbc0d498d8cfaaa622a749cf08ed85b6fc1c39') no-repeat center center/cover;
             display: flex;
             justify-content: center;
@@ -154,18 +153,16 @@
 </head>
 <body>
 
-    <header>Campagne de MAIRE Anael pour les élections CVL</header>
+    <header>Campagne de MAIRE Anael</header>
 
     <main>
-        <!-- Full-screen image with a centered button -->
         <div id="intro">
             <a href="#" id="discoverBtn" class="button">Découvrir mon programme</a>
         </div>
 
-        <!-- Presentation after button click -->
         <div id="presentation">
             <h1>Qui suis-je ?</h1>
-            <p>Je ne vous le cache pas, je suis arrivé ici un peu par hasard… ou plutôt à cause d’un pari perdu ! Mais, puisqu'il faut bien aller jusqu'au bout, autant le faire du mieux possible non ? Alors c'est avec humour, sérieux (il en faut bien un peu quand même) et détermination, que je compte bien défendre vos intérêts.</p>
+            <p>Je ne vous le cache pas, je suis arrivé ici un peu par hasard… Mais, puisqu'il faut bien aller jusqu'au bout, autant le faire du mieux possible non ? Alors c'est avec humour, sérieux (il en faut bien un peu quand même) et détermination, que je compte bien défendre vos intérêts.</p>
             
             <div class="actions">
                 <a href="#" class="button" data-target="program1">Réformer le self</a>
@@ -180,7 +177,7 @@
 
                 <a href="#" class="button" data-target="program3">Être à votre écoute</a>
                 <div id="program3" class="content">
-                    <p>Je tiens à porter vos idées, vos petits projets qui, au final, contribuent à faire du lycée un endroit où il fait bon vivre. Je suis ici pour vous écouter, vous comprendre et vous aider à rendre votre quotidien meilleur.</p>
+                    <p>Je tiens à porter vos idées, vos petits projets qui, au final, contribuent à faire du lycée un endroit où il fait bon vivre. Je suis ici pour vous écouter, vous comprendre et vous aider à rendre votre quotidien meilleur. (voir la catégorie "vos projets")</p>
                 </div>
 
                 <!-- Nouveau bouton "Vos projets" -->
@@ -189,11 +186,49 @@
         </div>
     </main>
 
-   <footer>
+    <footer>
        <a href="https://matias.me/nsfw/" style="color: inherit; text-decoration: none;">
-          &copy; 2024 Maire Anael et son équipe - Tout droits réservés
+          &copy; 2024 Maire Anael et son équipe - Tous droits réservés
        </a>
    </footer>
+
+    <!-- Script Firebase pour le compteur de visites -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyATBBmuIx94ZrOAY56KUdX2YUdQWbakdJY",
+            authDomain: "vos-projets.firebaseapp.com",
+            databaseURL: "https://vos-projets-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "vos-projets",
+            storageBucket: "vos-projets.appspot.com",
+            messagingSenderId: "12303899246",
+            appId: "1:12303899246:web:b4b069e7082a1279e3647f",
+            measurementId: "G-VK5K6QRW26"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const visitCountRef = ref(database, 'visits/count');
+
+        get(visitCountRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const currentCount = snapshot.val();
+                console.log('Nombre actuel de visites :', currentCount);
+
+                const newCount = currentCount + 1;
+                set(visitCountRef, newCount).then(() => {
+                    console.log('Compteur mis à jour à :', newCount);
+                });
+            } else {
+                console.log("Aucune donnée existante, initialisation du compteur à 1.");
+                set(visitCountRef, 1);
+            }
+        }).catch((error) => {
+            console.error("Erreur lors de la récupération du compteur :", error);
+        });
+    </script>
 
     <script>
         const discoverBtn = document.getElementById('discoverBtn');
@@ -201,17 +236,15 @@
         const presentation = document.getElementById('presentation');
         const buttons = document.querySelectorAll('.button[data-target]');
 
-        // Transition between intro and presentation
         discoverBtn.addEventListener('click', function(e) {
             e.preventDefault();
             intro.classList.add('fadeOut');
             setTimeout(() => {
                 intro.style.display = 'none';
                 presentation.classList.add('active');
-            }, 1000); // Délai de 1 seconde pour l'effet de transition
+            }, 1000); 
         });
 
-        // Toggle program content display
         buttons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
